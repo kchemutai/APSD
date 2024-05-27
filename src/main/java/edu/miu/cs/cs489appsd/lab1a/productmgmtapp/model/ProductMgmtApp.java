@@ -64,15 +64,37 @@ public class ProductMgmtApp {
     }
 
     private static void printProductsAsCsv(List<Product> products) {
-        StringBuilder csvBuilder = new StringBuilder();
-        csvBuilder.append("productId,name,dateSupplied,quantityInStock,unitPrice\n");
+        // Calculate the maximum width for each column
+        int productIdWidth = "productId".length();
+        int nameWidth = "name".length();
+        int dateSuppliedWidth = "dateSupplied".length();
+        int quantityInStockWidth = "quantityInStock".length();
+        int unitPriceWidth = "unitPrice".length();
+
         for (Product product : products) {
-            csvBuilder.append(product.getProductId()).append(",");
-            csvBuilder.append(product.getName()).append(",");
-            csvBuilder.append(product.getDateSupplied()).append(",");
-            csvBuilder.append(product.getQuantityInStock()).append(",");
-            csvBuilder.append(product.getUnitPrice()).append("\n");
+            productIdWidth = Math.max(productIdWidth, String.valueOf(product.getProductId()).length());
+            nameWidth = Math.max(nameWidth, product.getName().length());
+            dateSuppliedWidth = Math.max(dateSuppliedWidth, product.getDateSupplied().toString().length());
+            quantityInStockWidth = Math.max(quantityInStockWidth, String.valueOf(product.getQuantityInStock()).length());
+            unitPriceWidth = Math.max(unitPriceWidth, String.valueOf(product.getUnitPrice()).length());
         }
+
+        // Create format strings for each column
+        String format = "%-" + productIdWidth + "s %-"+ nameWidth +"s %-"+ dateSuppliedWidth +"s %-"+ quantityInStockWidth +"s %-"+ unitPriceWidth + "s\n";
+
+        // Build the CSV string
+        StringBuilder csvBuilder = new StringBuilder();
+        csvBuilder.append(String.format(format, "productId", "name", "dateSupplied", "quantityInStock", "unitPrice"));
+        for (Product product : products) {
+            csvBuilder.append(String.format(format,
+                    product.getProductId(),
+                    product.getName(),
+                    product.getDateSupplied(),
+                    product.getQuantityInStock(),
+                    product.getUnitPrice()));
+        }
+
+        // Print the CSV string
         System.out.println("------------------------------------");
         System.out.println("Printed in Comma-Separated Value(CSV) Format");
         System.out.println(csvBuilder.toString());
