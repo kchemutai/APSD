@@ -29,13 +29,13 @@ public class ProductMgmtApp {
         jsonBuilder.append("[\n");
         for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
-            jsonBuilder.append("  {\n");
-            jsonBuilder.append("    \"productId\": ").append(product.getProductId()).append(",\n");
-            jsonBuilder.append("    \"name\": \"").append(product.getName()).append("\",\n");
-            jsonBuilder.append("    \"dateSupplied\": \"").append(product.getDateSupplied()).append("\",\n");
-            jsonBuilder.append("    \"quantityInStock\": ").append(product.getQuantityInStock()).append(",\n");
-            jsonBuilder.append("    \"unitPrice\": ").append(product.getUnitPrice()).append("\n");
-            jsonBuilder.append("  }");
+            jsonBuilder.append("  { ");
+            jsonBuilder.append("\"productId\": ").append(product.getProductId()).append(", ");
+            jsonBuilder.append("\"name\": \"").append(product.getName()).append("\", ");
+            jsonBuilder.append("\"dateSupplied\": \"").append(product.getDateSupplied()).append("\", ");
+            jsonBuilder.append("\"quantityInStock\": ").append(product.getQuantityInStock()).append(", ");
+            jsonBuilder.append("\"unitPrice\": ").append(product.getUnitPrice());
+            jsonBuilder.append(" }");
             if (i < products.size() - 1) {
                 jsonBuilder.append(",");
             }
