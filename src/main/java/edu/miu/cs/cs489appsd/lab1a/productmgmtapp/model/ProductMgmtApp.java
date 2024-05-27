@@ -64,7 +64,6 @@ public class ProductMgmtApp {
     }
 
     private static void printProductsAsCsv(List<Product> products) {
-        // Calculate the maximum width for each column
         int productIdWidth = "productId".length();
         int nameWidth = "name".length();
         int dateSuppliedWidth = "dateSupplied".length();
@@ -79,10 +78,8 @@ public class ProductMgmtApp {
             unitPriceWidth = Math.max(unitPriceWidth, String.valueOf(product.getUnitPrice()).length());
         }
 
-        // Create format strings for each column
         String format = "%-" + productIdWidth + "s %-"+ nameWidth +"s %-"+ dateSuppliedWidth +"s %-"+ quantityInStockWidth +"s %-"+ unitPriceWidth + "s\n";
 
-        // Build the CSV string
         StringBuilder csvBuilder = new StringBuilder();
         csvBuilder.append(String.format(format, "productId", "name", "dateSupplied", "quantityInStock", "unitPrice"));
         for (Product product : products) {
@@ -93,8 +90,6 @@ public class ProductMgmtApp {
                     product.getQuantityInStock(),
                     product.getUnitPrice()));
         }
-
-        // Print the CSV string
         System.out.println("------------------------------------");
         System.out.println("Printed in Comma-Separated Value(CSV) Format");
         System.out.println(csvBuilder.toString());
